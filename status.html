@@ -2,6 +2,7 @@
 <html lang="pt-br">
 
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -21,7 +22,7 @@
 
 <h2>Status</h2>
 
-<p class="ativo">Lavagem em andamento 🫧</p>
+<p class="ativo" id="statusTexto">Lavagem em andamento 🫧</p>
 
 </div>
 
@@ -30,7 +31,7 @@
 
 <h2>Tempo restante</h2>
 
-<p id="tempo">35 min</p>
+<p id="tempo">--:--</p>
 
 </div>
 
@@ -48,10 +49,21 @@ const maq = parametros.get("maq");
 
 const titulo = document.getElementById("maquina");
 
+const tempoTela = document.getElementById("tempo");
+
+const statusTexto = document.getElementById("statusTexto");
+
+
+// tempo inicial de cada máquina (em minutos)
+
+let tempoInicial = 0;
+
 
 if(maq == 1){
 
 titulo.innerHTML = "Lavadora 1";
+
+tempoInicial = 35;
 
 }
 
@@ -59,13 +71,52 @@ else if(maq == 2){
 
 titulo.innerHTML = "Lavadora 2";
 
+tempoInicial = 40;
+
 }
 
 else if(maq == 3){
 
 titulo.innerHTML = "Secadora";
 
+tempoInicial = 25;
+
 }
+
+
+// converte minutos em segundos
+
+let tempo = tempoInicial * 60;
+
+
+// contador regressivo
+
+function atualizarTempo(){
+
+let minutos = Math.floor(tempo / 60);
+
+let segundos = tempo % 60;
+
+segundos = segundos < 10 ? "0" + segundos : segundos;
+
+tempoTela.innerHTML = minutos + ":" + segundos;
+
+if(tempo <= 0){
+
+statusTexto.innerHTML = "Lavagem finalizada ✅";
+
+clearInterval(contador);
+
+}
+
+tempo--;
+
+}
+
+
+let contador = setInterval(atualizarTempo,1000);
+
+atualizarTempo();
 
 
 function voltar(){
