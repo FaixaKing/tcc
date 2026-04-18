@@ -31,13 +31,13 @@ const statusTexto = document.getElementById("status");
 
 async function lerNFC(){
 
+if ("NDEFReader" in window){
+
 try{
 
 const ndef = new NDEFReader();
 
 await ndef.scan();
-
-statusTexto.innerHTML = "Aguardando leitura do cartão...";
 
 ndef.onreading = event => {
 
@@ -53,8 +53,17 @@ window.location.href="status.html";
 
 }catch(error){
 
-statusTexto.innerHTML =
-"NFC não suportado neste dispositivo";
+// não mostra erro na tela
+
+console.log("Erro ao acessar NFC");
+
+}
+
+}else{
+
+// se navegador não suporta NFC não mostra erro
+
+console.log("NFC não suportado");
 
 }
 

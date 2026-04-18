@@ -1,37 +1,41 @@
 body{
 
-background:#860dcb;
+background: #1c1c1c;
 
-font-family:Arial;
+font-family: Arial;
 
-display:flex;
+color: white;
 
-justify-content:center;
+text-align: center;
 
-align-items:center;
-
-height:100vh;
-
-margin:0;
-
-color:white;
+margin-top: 120px;
 
 }
-
 
 .container{
 
-text-align:center;
+background: white;
+
+color: black;
+
+width: 300px;
+
+margin: auto;
+
+padding: 30px;
+
+border-radius: 20px;
+
+box-shadow: 5px 5px 10px rgba(0,0,0,0.4);
 
 }
 
-
 .tempo{
 
-font-size:5rem;
+font-size: 50px;
 
-font-weight:bold;
+margin: 20px;
 
-margin:20px;
+font-weight: bold;
 
 }
