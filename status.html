@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Status da Lavagem</title>
+
+<link rel="stylesheet" href="./css/status.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1 id="maquina">Carregando máquina...</h1>
+
+<div class="tempo" id="tempo">
+
+45:00
+
+</div>
+
+<p>Status: Lavando</p>
+
+</div>
+
+
+<script>
+
+/* detectar máquina pela URL */
+
+const parametros = new URLSearchParams(window.location.search)
+
+const maquina = parametros.get("maquina")
+
+document.getElementById("maquina").innerHTML =
+"Lavadora " + maquina
+
+
+/* contador regressivo */
+
+let tempo = 45 * 60
+
+function atualizarTempo(){
+
+let minutos = Math.floor(tempo / 60)
+
+let segundos = tempo % 60
+
+segundos = segundos < 10 ? "0" + segundos : segundos
+
+document.getElementById("tempo").innerHTML =
+minutos + ":" + segundos
+
+tempo--
+
+if(tempo < 0){
+
+window.location.href = "finalizado.html"
+
+}
+
+}
+
+setInterval(atualizarTempo, 1000)
+
+</script>
+
+</body>
+
+</html>
