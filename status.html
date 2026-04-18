@@ -2,13 +2,12 @@
 <html lang="pt-br">
 
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Status da Lavagem</title>
 
-<link rel="stylesheet" href="status.css">
+<link rel="stylesheet" href="./css/status.css">
 
 </head>
 
@@ -16,91 +15,66 @@
 
 <div class="container">
 
-<h1 id="titulo">Carregando máquina...</h1>
+<h1 id="maquina">Lavadora</h1>
 
-<div class="tempo" id="tempo">
-00:00
+<div class="card">
+
+<h2>Status</h2>
+
+<p class="ativo">Lavagem em andamento 🫧</p>
+
 </div>
 
-<p id="status">Preparando...</p>
+
+<div class="card tempo">
+
+<h2>Tempo restante</h2>
+
+<p id="tempo">35 min</p>
+
+</div>
+
+
+<button onclick="voltar()">Voltar</button>
 
 </div>
 
 
 <script>
 
-/* detectar qual máquina veio do cartão */
+const parametros = new URLSearchParams(window.location.search);
 
-const params = new URLSearchParams(window.location.search)
+const maq = parametros.get("maq");
 
-const maquina = params.get("maq")
+const titulo = document.getElementById("maquina");
 
 
-/* definir tempo de cada máquina */
+if(maq == 1){
 
-let tempo
-
-if(maquina == "1"){
-
-tempo = 45 * 60
-document.getElementById("titulo").innerHTML = "Lavadora 01"
+titulo.innerHTML = "Lavadora 1";
 
 }
 
-else if(maquina == "2"){
+else if(maq == 2){
 
-tempo = 40 * 60
-document.getElementById("titulo").innerHTML = "Lavadora 02"
-
-}
-
-else if(maquina == "secadora"){
-
-tempo = 30 * 60
-document.getElementById("titulo").innerHTML = "Secadora"
+titulo.innerHTML = "Lavadora 2";
 
 }
 
-else{
+else if(maq == 3){
 
-tempo = 50 * 60
-document.getElementById("titulo").innerHTML = "Lavadora Pet"
+titulo.innerHTML = "Secadora";
 
 }
 
 
-/* contador regressivo */
+function voltar(){
 
-function atualizarTempo(){
-
-let minutos = Math.floor(tempo / 60)
-
-let segundos = tempo % 60
-
-if(segundos < 10){
-
-segundos = "0" + segundos
+window.location.href="index.html";
 
 }
-
-document.getElementById("tempo").innerHTML =
-minutos + ":" + segundos
-
-tempo--
-
-if(tempo < 0){
-
-document.getElementById("status").innerHTML =
-"Lavagem finalizada ✅"
-
-}
-
-}
-
-setInterval(atualizarTempo, 1000)
 
 </script>
 
 </body>
-
 </html>
